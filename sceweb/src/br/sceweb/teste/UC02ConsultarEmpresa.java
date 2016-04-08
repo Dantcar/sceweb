@@ -12,7 +12,7 @@ import br.sceweb.modelo.EmpresaDAO;
 public class UC02ConsultarEmpresa {
 
 	static Empresa empresa = new Empresa();
-	EmpresaDAO empresaDAO = new EmpresaDAO();
+	static EmpresaDAO empresaDAO = new EmpresaDAO();
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -23,17 +23,59 @@ public class UC02ConsultarEmpresa {
 		empresa.setTelefone("222");
 	
 	}
-
-
+	
+	/**
+	 * obj - verificar o comportamento do sistema na consulta de empresa com sucesso
+	 */
+	
+	
 	@Test
-	public void test() {
+	public void CT01UFBConsutarEmpresa_com_sucesso() {
 		empresaDAO.adiciona(empresa);
 		assertTrue(empresa.equals(empresaDAO.consultaEmpresa("89424232000180")));
 		empresaDAO.exclui("89424232000180");
 	}
 	
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
+	/**
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void CT02UC02A1ConsultarEmpresa_cnpj_invalido(){
+		assertNull(empresaDAO.consultaEmpresa("111111"));
+	}
+	
+	
+
+	
+
+	/**
+	 * obj - verificar empresa nao cadastrada
+	 * 
+	 */
+	@Test
+	public void CT03UC02A1ConsultarEmpresa_cnpj_invalido(){
+		assertNull(empresaDAO.consultaEmpresa(""));
+	}
+	
+	/**
+	 * obj - verificar empresa nao cadastrada
+	 * 
+	 */
+	@Test
+	public void CT04UC02A1ConsultarEmpresa_cnpj_invalido(){
+		assertNull(empresaDAO.consultaEmpresa("%"));
 	}
 
+	/**
+	 * obj - 
+	 * 
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	empresaDAO.exclui("89424232000180");
+	}
+	
+	
+	
 }
