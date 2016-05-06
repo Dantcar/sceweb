@@ -15,7 +15,7 @@ public class UC05CadastrarConvenio {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	convenioDAO = new ConvenioDAO();
-	convenio = new Convenio();
+	convenio = new Convenio("a","b","c");
 	
 	}
 
